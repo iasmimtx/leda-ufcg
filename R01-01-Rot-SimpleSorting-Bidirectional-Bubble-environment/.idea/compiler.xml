@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="submission" />
+        <module name="R01-01-Rot-SimpleSorting-Bidirectional-Bubble-environment" />
       </profile>
     </annotationProcessing>
   </component>
