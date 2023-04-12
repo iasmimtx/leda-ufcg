@@ -7,3 +7,23 @@
   <level>FINE</level>
   <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 150.165.42.160 at 05-04-2023 09*42*53</message>
 </record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-04-10T17:48:56.627-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 10-04-2023 17*48*56</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-04-10T21:29:30.334-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 10-04-2023 21*29*30</message>
+</record>

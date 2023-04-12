@@ -1,6 +1,7 @@
 package sorting.simpleSorting;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 /**
  * The selection sort algorithm chooses the smallest element from the array and
@@ -8,10 +9,30 @@ import sorting.AbstractSorting;
  * stores it in the second position, and so on until the array is sorted.
  */
 public class SelectionSort<T extends Comparable<T>> extends AbstractSorting<T> {
+    /**
+     * O selection sort é um algoritmo de ordenação simples que consiste em encontrar repetidamente o menor elemento
+     * de um vetor e trocá-lo com o elemento na posição atual, até que todo o vetor esteja ordenado.
+     */
 
-	@Override
-	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not Implemented yet!");
-	}
+    @Override
+    public void sort(T[] array, int leftIndex, int rightIndex) {
+        if (isValidation(array, leftIndex, rightIndex)) {
+            for (int i = leftIndex; i <= rightIndex; i++) {
+                int menor = i;
+                for (int j = i + 1; j <= rightIndex; j++) {
+                    if (array[j].compareTo(array[menor]) < 0) {
+                        menor = j;
+                    }
+                }
+                Util.swap(array, i, menor);
+            }
+        }
+    }
+
+    private boolean isValidation(T[] array, int leftIndex, int rightIndex) {
+        boolean result = true;
+        if (leftIndex > rightIndex || leftIndex < 0 || rightIndex < 0 || rightIndex > array.length || array.equals(null))
+            result = false;
+        return result;
+    }
 }
