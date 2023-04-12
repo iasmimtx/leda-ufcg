@@ -10,44 +10,42 @@ import sorting.AbstractSorting;
  */
 public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
-	@Override
-	public void sort(T[] array, int leftIndex, int rightIndex) {
-		if (leftIndex >= rightIndex || rightIndex >= array.length ) return;
-		int middle = (leftIndex + rightIndex) / 2;
-		sort(array, leftIndex, middle);
-		sort(array, middle + 1, rightIndex);
-		merge(array, leftIndex, middle, rightIndex);
+    @Override
+    public void sort(T[] array, int leftIndex, int rightIndex) {
+        if (isValidation(array, leftIndex, rightIndex)) {
+            int middle = (leftIndex + rightIndex) / 2;
+            sort(array, leftIndex, middle);
+            sort(array, middle + 1, rightIndex);
+            merge(array, leftIndex, middle, rightIndex);
+        }
+    }
 
-	}
+    private void merge(T[] array, int left, int middle, int right) {
+        T[] helper = array.clone();
 
-	private void merge(T[] array, int left, int middle, int right) {
-		T[] helper = array.clone();
+        int i = left;
+        int j = middle + 1;
+        int k = left;
 
-		int i = left;
-		int j = middle + 1;
-		int k = left;
+        while (i <= middle && j <= right) {
+            if (helper[i].compareTo(helper[j]) <= 0) {
+                array[k++] = helper[i++];
+            } else {
+                array[k++] = helper[j++];
+            }
+        }
 
-		while(i <= middle && j <= right){
-			if(helper[i].compareTo(helper[j]) <= 0){
-				array[k] = helper[i];
-				i++;
-			} else {
-				array[k] = helper[j];
-				j++;
-			}
-			k++;
-		}
+        while (i <= middle) {
+            array[k++] = helper[i++];
+        }
 
-		if(i <= middle){
-			array[k] = helper[i];
-			i++;
-			k++;
-		}
+        while (j <= right) {
+            array[k++] = helper[j++];
+        }
+    }
 
-		if(j <= right) {
-			array[k] = helper[j];
-			j++;
-			k++;
-		}
-	}
+    private boolean isValidation(T[] array, int leftIndex, int rightIndex) {
+        boolean result = leftIndex < rightIndex && array != null && leftIndex >= 0 && rightIndex >= 0 && rightIndex <= array.length;
+        return result;
+    }
 }
