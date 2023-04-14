@@ -31,16 +31,18 @@ public class HybridMergeSort<T extends Comparable<T>> extends
 	protected static int INSERTIONSORT_APPLICATIONS = 0;
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		if((leftIndex + rightIndex) + 1  <= SIZE_LIMIT){
-			this.insertionSort(array, leftIndex, rightIndex);
-			INSERTIONSORT_APPLICATIONS++;
-		} else {
-			if(leftIndex < rightIndex){
-				int middle = (leftIndex  + rightIndex) / 2 ;
-				this.sort(array, leftIndex, middle);
-				this.sort(array, middle + 1, rightIndex);
-				this.merge(array, leftIndex, middle, rightIndex);
-				MERGESORT_APPLICATIONS++;
+		if(isValidation(array, leftIndex, rightIndex)){
+			if ((leftIndex + rightIndex) + 1 <= SIZE_LIMIT) {
+				this.insertionSort(array, leftIndex, rightIndex);
+				INSERTIONSORT_APPLICATIONS++;
+			} else {
+				if (leftIndex < rightIndex) {
+					int middle = (leftIndex + rightIndex) / 2;
+					this.sort(array, leftIndex, middle);
+					this.sort(array, middle + 1, rightIndex);
+					this.merge(array, leftIndex, middle, rightIndex);
+					MERGESORT_APPLICATIONS++;
+				}
 			}
 		}
 	}
@@ -76,5 +78,9 @@ public class HybridMergeSort<T extends Comparable<T>> extends
 				j--;
 			}
 		}
+	}
+	private boolean isValidation(T[] array, int leftIndex, int rightIndex) {
+		boolean result = leftIndex < rightIndex && array != null && leftIndex >= 0 && rightIndex >= 0 && rightIndex <= array.length;
+		return result;
 	}
 }
