@@ -32,16 +32,15 @@ public class HybridMergeSort<T extends Comparable<T>> extends
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		if((leftIndex + rightIndex) + 1  <= SIZE_LIMIT){
+			this.insertionSort(array, leftIndex, rightIndex);
 			INSERTIONSORT_APPLICATIONS++;
-			insertionSort(array, leftIndex, rightIndex);
 		} else {
 			if(leftIndex < rightIndex){
-				MERGESORT_APPLICATIONS++;
 				int middle = (leftIndex  + rightIndex) / 2 ;
-				sort(array, leftIndex, middle);
-				sort(array, middle + 1, rightIndex);
-				merge(array, leftIndex, middle, rightIndex);
-
+				this.sort(array, leftIndex, middle);
+				this.sort(array, middle + 1, rightIndex);
+				this.merge(array, leftIndex, middle, rightIndex);
+				MERGESORT_APPLICATIONS++;
 			}
 		}
 	}
