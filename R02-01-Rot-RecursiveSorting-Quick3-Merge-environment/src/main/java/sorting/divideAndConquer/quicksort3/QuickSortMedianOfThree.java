@@ -18,30 +18,51 @@ import util.Util;
  * 6. Aplicar o algoritmo na particao a esquerda e na particao a direita do pivô.
  */
 public class QuickSortMedianOfThree<T extends Comparable<T>> extends
-		AbstractSorting<T> {
+        AbstractSorting<T> {
 
-	public void sort(T[] array, int leftIndex, int rightIndex) {
-		if(leftIndex < rightIndex) {
-			int index_pivot = partition(array, leftIndex, rightIndex);
-			sort(array, leftIndex, index_pivot - 1);
-			sort(array, index_pivot + 1, rightIndex);
-		}
-	}
+    public void sort(T[] array, int leftIndex, int rightIndex) {
+        if(isValidation(array, leftIndex, rightIndex)) {
+            if (leftIndex < rightIndex) {
+                int index_pivot = partition(array, leftIndex, rightIndex);
+                sort(array, leftIndex, index_pivot - 1);
+                sort(array, index_pivot + 1, rightIndex);
+            }
+        }
+    }
 
-	private int partition(T[] array, int leftIndex, int rightIndex) {
-		int pivot = mediana(array, leftIndex, rightIndex);
+    private int partition(T[] array, int leftIndex, int rightIndex) {
+        ordena(array, leftIndex, rightIndex);
 
-	}
+        int middle = (leftIndex + rightIndex) / 2;
+        T pivot = array[middle];
+        Util.swap(array, middle, rightIndex - 1);
 
-	private int mediana(T[] array, int leftIndex, int rightIndex) {
-		for(int i = leftIndex + 1; i <= rightIndex; i++){
-			int j = i;
-			while(j > 0 && array[j].compareTo(array[j - 1]) < 0) {
-				Util.swap(array, j, j -1);
-				j--;
-			}
-		}
-		int middle = (leftIndex + rightIndex) / 2;
-		return middle;
-	}
+
+        int i = leftIndex + 1;
+        int j = rightIndex - 1;
+        while (i < j) {
+            if (array[i].compareTo(pivot) >= 0) {
+                j--;
+                Util.swap(array, i, j);
+            } else {
+                i++;
+            }
+        }
+        Util.swap(array, rightIndex - 1, j);
+        return j;
+    }
+
+    private void ordena(T[] array, int leftIndex, int rightIndex) {
+        for (int i = leftIndex + 1; i <= rightIndex; i++) {
+            int j = i;
+            while (j > 0 && array[j].compareTo(array[j - 1]) < 0) {
+                Util.swap(array, j, j - 1);
+                j--;
+            }
+        }
+    }
+
+    private boolean isValidation(T[] array, int leftIndex, int rightIndex) {
+        return leftIndex < rightIndex && array != null &&  array.length > 1 && leftIndex >= 0 && rightIndex <= array.length-1;
+    }
 }

@@ -37,7 +37,6 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
     }
 
     private boolean isValidation(T[] array, int leftIndex, int rightIndex) {
-        boolean result = leftIndex < rightIndex && array != null && leftIndex >= 0 && rightIndex >= 0 && rightIndex <= array.length;
-        return result;
+        return leftIndex < rightIndex && array != null &&  array.length > 1 && leftIndex >= 0 && rightIndex <= array.length-1;
     }
 }
