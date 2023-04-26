@@ -26,8 +26,7 @@ public class RecursiveBubbleSort<T extends Comparable<T>> extends
     }
 
     private boolean isValid(T[] array, int leftIndex, int rightIndex) {
-        boolean result = array != null && array.length > 0 && leftIndex > 0 && leftIndex < rightIndex && rightIndex < array.length;
-        return result;
+        return array != null && array.length > 0 && leftIndex >= 0 && leftIndex <= rightIndex && rightIndex < array.length;
     }
 
     private void swap(T[] array, int i, int j) {
