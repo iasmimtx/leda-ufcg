@@ -26,10 +26,11 @@ public class RecursiveSelectionSort<T extends Comparable<T>> extends
             for (int i = leftIndex + 1; i <= rightIndex; i++) {
                 if (array[i].compareTo(array[menor]) < 0) {
                     menor = i;
-                    swap(array, leftIndex, menor);
                 }
-                sort(array, leftIndex + 1, rightIndex);
             }
+            swap(array, leftIndex, menor);
+            sort(array, leftIndex + 1, rightIndex);
+
         }
     }
 
@@ -38,5 +39,4 @@ public class RecursiveSelectionSort<T extends Comparable<T>> extends
         array[i] = array[j];
         array[j] = aux;
     }
-
 }
