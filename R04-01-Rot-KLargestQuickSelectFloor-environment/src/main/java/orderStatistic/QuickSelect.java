@@ -40,23 +40,24 @@ public class QuickSelect<T extends Comparable<T>> {
      */
     public T quickSelect(T[] array, int k) {
         if (k < 0 || k > array.length) return null;
-        return quickSelect(array, 0, array.length, k);
+        return quickSelect(array, 0, array.length-1, k);
     }
 
     private T quickSelect(T[] array, int left, int right, int k) {
-        int pivot = partition(array, 0, array.length - 1);
+        int pivot = partition(array, left, right);
         T result;
-        if (k - 1 == pivot) result = array[k];
-        else if (pivot < k - 1) result = quickSelect(array, pivot + 1, right, k);
-        else result = quickSelect(array, left, pivot - 1, k);
+        if (k - 1 == pivot - left) result = array[pivot];
+        else if (k - 1 < pivot - left) result = quickSelect(array, left, pivot - 1, k);
+        else result = quickSelect(array, pivot + 1, right, k - (pivot - left + 1));
         return result;
     }
 
     private int partition(T[] array, int left, int right) {
        T pivot =  array[left];
         int i = left;
-        for (int j = left + 1; j < right; j++) {
+        for (int j = i + 1; j <= right; j++) {
             if (array[j].compareTo(pivot) <= 0) {
+                i++;
                 Util.swap(array, i, j);
             }
         }
