@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-04-27T18:22:52.417-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 27-04-2023 18*22*52</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-05-02T19:40:40.458-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 02-05-2023 19*40*40</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-05-02T20:20:01.410-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 02-05-2023 20*20*01</message>
+</record>

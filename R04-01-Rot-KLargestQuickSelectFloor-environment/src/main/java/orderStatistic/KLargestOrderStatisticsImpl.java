@@ -30,25 +30,17 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
     @Override
     public T[] getKLargest(T[] array, int k) {
-        // ordenaArraySelection(array, 0, array.length - 1);
-        if (k < 0 || k > array.length) return (T[]) new Comparable[]{};
-        T[] saida = (T[]) new Comparable[k];
-        int cont = 0;
-        int indexF = array.length;
-        while (cont < k) {
-            saida[cont] = orderStatistics(array, indexF);
-            cont++;
-            indexF--;
-        }
-        return saida;
-    }
-
-    private void ordenaArraySelection(T[] array, int left, int right) {
-        int min = left;
-        for (int i = left + 1; i < right; i++) {
-            if (array[i].compareTo(array[min]) < 0)
-                Util.swap(array, i, left);
-            ordenaArraySelection(array, left + 1, right);
+        if (array != null && array.length > 0 && k >= 1 && k <= array.length) {
+            T[] saida = (T[]) new Comparable[k];
+            this.orderStatistics(array, array.length - k);
+            int i = 0;
+            for (int j = array.length - k; j < array.length; j++) {
+                saida[i] = array[j];
+                i++;
+            }
+            return saida;
+        } else {
+            return (T[]) new Comparable[]{};
         }
     }
 
@@ -65,18 +57,20 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
      * @return
      */
     public T orderStatistics(T[] array, int k) {
-        if (k > array.length || k < 0) return null;
-        ordenaArray(array, 0, array.length - 1);
-        return array[k - 1];
-    }
-
-    private void ordenaArray(T[] array, int left, int rigth) {
-        if (left < rigth) {
-            for (int i = 0; i < rigth; i++) {
-                if (array[i].compareTo(array[i + 1]) > 0)
-                    Util.swap(array, i, i + 1);
+        T saida = null;
+        if (array != null && array.length != 0 && k >= 1 && k <= array.length) {
+            for (int j = 0; j < k; j++) {
+                int menor = j;
+                for (int i = j + 1; i < array.length; i++) {
+                    if (array[i].compareTo(array[menor]) < 0) {
+                        menor = i;
+                    }
+                }
+                Util.swap(array, j, menor);
             }
-            ordenaArray(array, left, rigth - 1);
+            saida =  array[k - 1];
         }
+        return saida;
+
     }
 }

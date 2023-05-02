@@ -1,6 +1,8 @@
 package problems;
 
 
+import util.Util;
+
 /**
  * Retorna o elemento do array que eh igual ou menor e mais proximo possivel dele.
  * <p>
@@ -16,8 +18,35 @@ public class FloorBinarySearchImpl implements Floor {
 
     @Override
     public Integer floor(Integer[] array, Integer x) {
-        if (array == null || array.length == 0) return null;
-        return search(array, 0, array.length - 1, x);
+        if (array != null && array.length > 0 && x != null) {
+            quickSort(array, 0, array.length - 1);
+            return search(array, 0, array.length - 1, x);
+        }
+        return null;
+    }
+
+    private void quickSort(Integer[] array, int left, int right) {
+        if (array != null && left >= 0 && left < right && right < array.length) {
+            int indexPivot = partition(array, left, right);
+            quickSort(array, left, indexPivot - 1);
+            quickSort(array, indexPivot + 1, right);
+        }
+    }
+
+    private int partition(Integer[] array, int left, int right) {
+        int pivot = array[left];
+        int i = left;
+
+        for (int j = left + 1; j <= right; j++) {
+            if (array[j].compareTo(pivot) <= 0) {
+                i += 1;
+                Util.swap(array, i, j);
+            }
+        }
+
+        Util.swap(array, left, i);
+
+        return i;
     }
 
     private Integer search(Integer[] array, int left, int right, Integer x) {
