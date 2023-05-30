@@ -1,8 +1,12 @@
 package adt.hashtable.closed;
 
 import adt.hashtable.hashfunction.HashFunction;
+import adt.hashtable.hashfunction.HashFunctionClosedAddress;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionFactory;
+import util.Util;
+
+import java.util.LinkedList;
 
 public class HashtableClosedAddressImpl<T> extends
 		AbstractHashtableClosedAddress<T> {
@@ -53,32 +57,80 @@ public class HashtableClosedAddressImpl<T> extends
 	 * prime.
 	 */
 	int getPrimeAbove(int number) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int saida = number;
+		while (!Util.isPrime(saida)) {
+			saida++;
+		}
+		return saida;
+
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null) {
+			int index = Math.abs(((HashFunctionClosedAddress<T>) this.hashFunction).hash(element));
+
+
+			LinkedList<T> elementTable = (LinkedList<T>) this.table[index];
+			if (elementTable == null) {
+				elementTable = new LinkedList<T>();
+				elementTable.add(element);
+				this.table[index] = elementTable;
+				this.elements++;
+			} else {
+				if (!elementTable.contains(element)) {
+					elementTable.add(element);
+					this.COLLISIONS++;
+					this.elements++;
+				}
+			}
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null) {
+			int index = Math.abs(((HashFunctionClosedAddress<T>) this.hashFunction).hash(element));
+			LinkedList<T> elementTable = ((LinkedList<T>) this.table[index]);
+
+			if (elementTable != null) {
+				if (elementTable.size() > 1) {
+					this.COLLISIONS--;
+				}
+				elementTable.remove(element);
+				this.elements--;
+				if (elementTable.isEmpty())
+					this.table[index] = null;
+			}
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T resultElement = null;
+		if (element != null) {
+			int index = Math.abs(((HashFunctionClosedAddress<T>) this.hashFunction).hash(element));
+
+			LinkedList<T> elementTable = ((LinkedList<T>) this.table[index]);
+			if (elementTable != null) {
+				if (elementTable.contains(element))
+					resultElement = elementTable.get(elementTable.indexOf(element));
+			}
+		}
+
+		return resultElement;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int result = -1;
+		int index = Math.abs(((HashFunctionClosedAddress<T>) this.hashFunction).hash(element));
+		LinkedList<T> elementTable = ((LinkedList<T>) this.table[index]);
+		if (elementTable != null) {
+			if (elementTable.contains(element))
+				result = index;
+		}
+		return result;
 	}
 
 }

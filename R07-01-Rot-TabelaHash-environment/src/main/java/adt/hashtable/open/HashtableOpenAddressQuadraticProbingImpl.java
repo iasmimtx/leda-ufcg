@@ -12,28 +12,72 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 		hashFunction = new HashFunctionQuadraticProbing<T>(size, method, c1, c2);
 		this.initiateInternalTable(size);
 	}
-
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (isFull()) {
+			throw new HashtableOverflowException();
+		}
+		if (element != null) {
+			int probe = 0;
+			int hash;
+			while (probe < capacity()) {
+				hash = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, probe++);
+				if (table[hash] == null || table[hash].equals(new DELETED())) {
+					table[hash] = element;
+					elements++;
+					break;
+				}
+				COLLISIONS++;
+			}
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null) {
+			int probe = 0;
+			int hash;
+			while (probe < capacity()) {
+				hash = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, probe++);
+				if (table[hash] != null && table[hash].equals(element)) {
+					this.table[hash] = new DELETED();
+					elements--;
+				}
+				COLLISIONS++;
+			}
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int cont = 0;
+		int hash;
+		T result = null;
+		while (cont < capacity()) {
+			hash = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, cont++);
+			if (this.table[hash] != null && this.table[hash].equals(element)) {
+				result = (T) table[hash];
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int probe = 0;
+		int hash;
+		int result = -1;
+		while (probe < capacity()) {
+			hash = ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, probe++);
+			if (this.table[hash] != null && this.table[hash].equals(element)) {
+				result = hash;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty();
 	}
 }
