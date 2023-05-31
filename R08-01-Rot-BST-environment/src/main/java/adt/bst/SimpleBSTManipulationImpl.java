@@ -7,23 +7,73 @@ package adt.bst;
  * @param <T>
  */
 public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements SimpleBSTManipulation<T> {
-
 	@Override
 	public boolean equals(BST<T> tree1, BST<T> tree2) {
-		// TODO Implement this method
-		throw new UnsupportedOperationException("Not implemented yet!");
+		boolean result = false;
+		if (tree1 != null && tree2 != null) {
+			result = equals((BSTNode<T>) tree1.getRoot(), (BSTNode<T>) tree2.getRoot());
+		}
+		return result;
+	}
+
+	private boolean equals(BSTNode<T> node1, BSTNode<T> node2) {
+		boolean result = false;
+		if (node1.isEmpty() && node2.isEmpty()) {
+			result = true;
+		} else if (node1.getData().equals(node2.getData())) {
+			result = this.equals((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
+					&& this.equals((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
+		}
+		return result;
 	}
 
 	@Override
 	public boolean isSimilar(BST<T> tree1, BST<T> tree2) {
-		// TODO Implement this method
-		throw new UnsupportedOperationException("Not implemented yet!");
+		boolean result = false;
+		if (tree1 != null && tree2 != null) {
+			return isSimilar((BSTNode<T>) tree1.getRoot(), (BSTNode<T>) tree2.getRoot());
+		}
+		return result;
+	}
+
+	private boolean isSimilar(BSTNode<T> node1, BSTNode<T> node2) {
+		boolean result = false;
+		if (node1.isEmpty() && node2.isEmpty()) {
+			result = true;
+		} else if (!node1.isEmpty() && !node2.isEmpty()) {
+			result = this.isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
+					&& this.isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
+		}
+		return result;
 	}
 
 	@Override
 	public T orderStatistic(BST<T> tree, int k) {
-		// TODO Implement this method
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+		if (tree != null) {
+			int size = tree.size();
+			if (k >= 1 && k <= size) {
+				if (k == 1) {
+					result = tree.minimum().getData();
+				} else if (k == size) {
+					result = tree.maximum().getData();
+				} else {
+					result = this.orderStatistic(tree, tree.minimum(), k);
+				}
+			}
+		}
+
+		return result;
+	}
+
+	private T orderStatistic(BST<T> tree, BSTNode<T> node, int k) {
+		T result;
+		if (k == 1) {
+			result = node.getData();
+		} else {
+			result = this.orderStatistic(tree, tree.sucessor(node.getData()), --k);
+		}
+		return result;
 	}
 
 }
