@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-05-30T21:05:17.953-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 30-05-2023 21*05*17</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-06-06T21:46:01.948-0300</date>
+  <logger>IASMIM MARIA FREIRE DA SILVA TORRES</logger>
+  <level>FINE</level>
+  <message>File 121110942-IASMIM MARIA FREIRE DA SILVA TORRES.zip was received. It was sent by IASMIM MARIA FREIRE DA SILVA TORRES from IP 172.31.96.1 at 06-06-2023 21*46*01</message>
+</record>
