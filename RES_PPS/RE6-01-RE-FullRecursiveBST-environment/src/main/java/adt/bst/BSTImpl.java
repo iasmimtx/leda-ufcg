@@ -19,20 +19,67 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public int height() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return height(root);
+	}
+
+	private int height(BSTNode<T> node) {
+		int result = -1;
+
+		if (!node.isEmpty()) {
+
+			BSTNode<T> leftNode = (BSTNode<T>) node.getLeft();
+			BSTNode<T> rightNode = (BSTNode<T>) node.getRight();
+
+			result = 1 + Math.max(height(leftNode), height(rightNode));
+		}
+
+		return result;
 	}
 
 	@Override
 	public BSTNode<T> search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return searchRec(this.root, element);
+	}
+
+	private BSTNode<T> searchRec(BSTNode<T> node, T element) {
+		BSTNode<T> result;
+		if(node.isEmpty() || node.getData().equals(element)) result = node;
+		else{
+			if(element.compareTo(node.getData()) > 0) result = searchRec((BSTNode<T>) node.getRight(), element);
+			else result = searchRec((BSTNode<T>) node.getLeft(), element);
+		}
+		return result;
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (this.isEmpty()) {
+			this.root = (BSTNode<T>) new BSTNode.Builder<T>()
+					.data(element)
+					.left(new BSTNode<T>())
+					.right(new BSTNode<T>())
+					.build();
+
+			this.root.getLeft().setParent(root);
+			this.root.getRight().setParent(root);
+		} else {
+			this.insert(root, element);
+		}
+
+	}
+
+	private void insert(BSTNode<T> node, T element) {
+		if (node.isEmpty()) {
+			node.setData(element);
+			node.setLeft(new BSTNode<T>());
+			node.getLeft().setParent(node);
+			node.setRight(new BSTNode<T>());
+			node.getRight().setParent(node);
+		} else if (element.compareTo(node.getData()) < 0) {
+			this.insert((BSTNode<T>) node.getLeft(), element);
+		} else {
+			this.insert((BSTNode<T>) node.getRight(), element);
+		}
 	}
 
 	@Override
